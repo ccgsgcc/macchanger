@@ -1,0 +1,18 @@
+.data__icons {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-wrap: wrap;
+   width: 100%;
+   gap:15px;
+   margin-top: 1vh;
+   margin-bottom: 1vh;
+
+   a .icon {
+      font-size: 40px;
+      color: #fff;
+      &:hover {
+         color: lime
+      }
+   }
+}

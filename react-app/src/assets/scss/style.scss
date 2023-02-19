@@ -1,0 +1,70 @@
+@import './varibles.scss';
+
+* {
+   box-sizing: border-box;
+   margin: 0;
+   padding: 0 ;
+   font-family: $LucidaSans;
+   transition:  all .3s ease;
+}
+body {
+   background-color: $primary;
+   color: $white;
+   font-size: $size;
+   overflow-x: hidden;
+   width: 100%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: column;
+   height: 100vh;
+   overflow-y: hidden;
+   position: relative;
+}
+body::after {
+   display: block;
+   content: "";
+   width: 50vw;
+   height: 50vw;
+   background-color: rgb(0, 255, 0, .05) ;
+   position: absolute;
+   top: 30vh;
+   right: 20px;
+   border-radius: 100%;
+   z-index: -1;
+   box-shadow: 0 0 10px 20px rgb(0, 255, 0, .05);
+}
+body::before {
+   display: block;
+   content: "";
+   width: 60vw;
+   height: 60vw;
+   background-color: rgba(255, 187, 0, 0.05) ;
+   position: absolute;
+   top: 40vh;
+   left: 10vw;
+   border-radius: 100%;
+   z-index: -2;
+   box-shadow: 0 0 10px 20px rgba(255, 187, 0, 0.05);
+}
+
+.App {
+   width: 100%;
+   max-width: 400px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: column;
+}
+
+::selection {
+   background-color: lime;
+   color: $black
+}
+#root {
+   width: 100%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: column;
+}

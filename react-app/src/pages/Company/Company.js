@@ -17,6 +17,7 @@ const Company = () => {
    }, [])
 
    const getCompany = async () => {
+      // U NEED TO CHANGE 
       axios.get(`http://127.0.0.1:8000/api/${slug}`)
          .then(res => {
                console.log(res.data)

@@ -1,0 +1,43 @@
+<div class="constructor__right__menu constructor__card">
+   <h2>Карточка</h2>
+   <div class="setting">
+      <label>Фоновой Цвет Карточки:  </label>
+      <input 
+         type="color" 
+         class="settings__color"
+         name = 'card_background_color'
+         value="{{company.card_background_color}}"
+         id = 'card_background_color'
+      />
+</div>
+<div class="setting">
+   <label>Закругление: </label>
+   <input 
+      type="text" 
+      class="settings__color"
+      name = 'card_border_radius'
+      value="{% if company.card_border_radius %}{{company.card_border_radius}}{% else %} 0px {% endif %}"
+      id = 'card_border_radius'
+   />
+</div>
+<div class="setting">
+   <label>Тень:</label>
+   <input 
+      type="text" 
+      class="settings__color settings__color__max"
+      name = 'card_box_shadow'
+      value="{{company.card_box_shadow}}"
+      id = 'card_box_shadow'
+   />
+</div>
+<div class="setting">
+   <label>Обводка: </label>
+   <input 
+      type="text" 
+      class="settings__color settings__color__max"
+      name = 'card_border'
+      value="{{company.card_border}}"
+      id = 'card_border'
+   />
+</div>
+</div>

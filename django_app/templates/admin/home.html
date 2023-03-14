@@ -1,0 +1,33 @@
+{% include "main.html" %}
+{% load static %}
+
+{% block title %}
+<title>Панель Управления</title>
+<link rel="stylesheet" href="{% static '/css/home.css' %}">
+{% endblock title %}
+
+{% block content %}
+<div class="page">
+   <div class="page__header">
+      <a href="{% url 'base:create' %}" class='btn'>Создать</a>
+   </div>
+   <div class="page__content">
+      {% for company in companies  %}
+         <div class="company">
+            <a href="{% url 'base:company' company.slug %}" class="link" >{{company.name}}</a>
+            <div>
+               <a 
+               href="{% url 'base:constructor' company.slug %}" 
+               class="btn"
+            >изменить</a>
+               <a 
+                  href="{% url 'base:company-delete' company.slug %}" 
+                  class="btn" 
+                  style="background-color: red"
+               >удалить</a>
+            </div>
+         </div>
+      {% endfor %}
+   </div>
+</div>
+{% endblock content %}

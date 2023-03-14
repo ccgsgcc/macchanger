@@ -1,0 +1,374 @@
+{% load static %}
+{% include 'main.html' %}
+
+{% block title %}
+   <title>{{company.username}}</title>
+   <link rel="stylesheet" href="{% static 'css/clientPage.css' %}">
+{% endblock title %}
+
+{% block content %}
+<style>
+   .pre__card {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      background-color: {{company.background_color}};
+      color: {{company.color}};
+      z-index: 0;
+   }
+   .card {
+      max-width: 360px;
+      display: flex;
+      /* justify-content: center; */
+      align-items: center;
+      flex-direction: column;
+      border: {{company.card_border}};
+      box-shadow:{{company.card_box_shadow}};
+      padding: 3vh .8rem;
+      border-radius: {{company.card_border_radius}};   
+      width: 100%;
+      background-color: {{company.card_background_color}};
+      z-index: 1;
+      min-height: 90vh;
+      height: 100%;
+      max-height: 90vh;
+   }
+   .card__item {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      width: 100%;
+      padding: 6px 4%;
+
+   }
+   .data__field {
+      width: 100%;
+   }
+   .our__logo {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      font-weight:800;
+   }
+   .data {
+      margin: 2% 0;
+      display: flex;
+      /* justify-content: center; */
+      flex-direction: column;
+      width: 100%;
+      align-items: center;
+   }
+   .data__image {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      margin: 3% 0;
+      margin-bottom: 2vh;
+   }
+   .data__image img {
+      width: {{company.card_image_width}};
+      height: {{company.card_image_height}};
+      object-fit: cover;
+      border-radius: {{company.card_image_border_radius}};
+      margin-bottom: 2vh;
+   }
+   .data__image h1 {
+      font-size: {{company.card_title_font_size}};
+      font-weight: {{company.card_title_font_weight}};
+      {% if company.card_title_font_family %}
+        font-family: {{company.card_title_font_family}};
+      {% endif %}
+      {% if company.card_title_font_color %}
+        color: {{company.card_title_font_color}};
+      {% endif %}
+   }
+   
+   .data__field {
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-start;
+      flex-direction: column;
+      margin-bottom: 5px;
+   }
+   .data__field label {
+      {% if company.card_label_color %}
+         color: {{company.card_label_color}};
+      {% endif %}
+      font-size: {{company.card_label_font_size}};
+      {% if company.card_label_font_family %}
+        font-family: {{company.card_label_font_family}};
+      {% endif %}
+      font-weight: {{company.card_label_font_weight}};
+   }
+   .text {
+      font-size: {{company.card_text_font_size}};
+      {% if company.card_text_font_family %}
+        font-family: {{company.card_text_font_family}};
+      {% endif %}
+      width: 100%;
+      {% if company.card_text_color %}
+         color: {{company.card_text_color}};
+      {% endif %}
+      {% if company.card_text_font_weight %}
+        font-weight: {{company.card_text_font_weight}};
+      {% endif %}
+      cursor: pointer;
+      {% if company.card_text_box_shadow %}
+        box-shadow: {{company.card_text_box_shadow}};
+      {% endif %}
+      {% if company.card_text_border_bottom %}
+        border-bottom: {{company.card_text_border_bottom}}
+      {% endif %}
+      {% if company.card_text_border %}
+         border: {{company.card_text_border}}
+      {% endif %}
+   }
+
+   ::selection {
+      background-color: {{company.card_button_background_color}};
+      color: {{company.card_button_color }}; 
+   }
+
+   .btn {
+      background-color: {{company.card_button_background_color}};
+      color: {{company.card_button_color }};
+      border-radius: {{company.card_button_border_radius}};
+      max-width: 100%;
+      {% if  company.card_button_box_shadow %} box-shadow: {{company.card_button_box_shadow}}{% endif %}
+   }
+   .btn:hover {
+      background-color: {{company.card_button_background_color_hover}};
+      color: {{company.card_button_color_hover}};
+      {% if company.card_button_border_radius_hover %}
+        border-radius: {{company.card_button_border_radius_hover}};
+      {% endif %}
+      {% if  company.card_button_box_shadow_hover %} box-shadow: {{company.card_button_box_shadow_hover}}{% endif %}
+   }
+   
+   @media screen and (max-width: 500px) {
+      .card {
+         width: 100vw;
+         height: 100vh;
+         border: none;
+         padding: 5vh 4vw;
+         max-width: 500px;
+      }
+   }
+   
+   .data__icons {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      padding: 0 10px;
+      gap: 10px;
+      margin-top: 1vh;
+      flex-wrap: wrap;
+   }
+
+   .icon {
+      {% if company.card_icon_color %}
+         color: {{company.card_icon_color}};
+      {% else %}
+         color: {{company.color}};
+      {% endif %}
+      text-decoration: none;
+      font-size: {{company.font_icon_size}};
+      transition: all .3s ease;
+   }
+   .icon:hover {
+      {% if company.card_icon_color_hover %}
+         color: {{company.card_icon_color_hover}};
+      {% endif %}
+   }
+
+   /*constructor__pre__card__back*/
+   .constructor__pre__card__back {
+   }
+   .constructor__card {
+      display: none;
+   }
+   .constructor__card__image {
+      display: none;
+   }
+   .constructor__card__h2 {
+      display: none;
+   }
+   .constructor__text {
+      display: none;
+   }
+   .button {
+      padding: 6px 10px;
+      background-color: lime;
+      border-radius: 10px;
+      outline: none;
+      border: none !important;
+      font-size: 16px;
+      margin: 6px;
+      transition: all .3s linear;
+      cursor: pointer;
+   }
+   .button:hover {
+      background-color: black;
+      color: aliceblue;
+   }
+   .constructor__button {
+      display: none;
+   }
+
+   .constructor__label {
+      display: none;
+   }
+</style>
+<div class="pre__card">
+   <div class="card">
+      <div class="card__item">
+      <div class="data__image">
+         <img src="/logotips/{{company.ava}}" alt="">
+         <h2>{{company.name}}</h2>
+      </div>
+      {% if company.title %}
+         <div class="data__field">
+            <label for="">Заголовок: </label>
+            <p  class="text"> {{company.title}}</p>
+         </div>
+      {% endif %}
+      {% if company.location %}
+         <div class="data__field">
+            <label for="">Место: </label>
+            <p  class="text"> {{company.location}}</p>
+         </div>
+      {% endif %}
+      {% if company.number %}
+         <div class="data__field">
+            <label for="">Номер: </label>
+            <p  class="text"> {{company.number}}</p>
+         </div>
+      {% endif %}
+      {% if company.email %}
+         <div class="data__field">
+            <label for="">Почта: </label>
+            <p class="text">{{company.email}}</p>
+         </div>
+      {% endif %}
+      {% if company.about %}
+         <div class="data__field">
+            <label for="">Об: </label>
+            <p class="text">{{company.about}}</p>
+         </div>
+      {% endif %}
+      <button class="btn" id="save">Сохранить</button>
+      <div class="data__icons">
+         {% if  company.facebook %}
+         <a class="fa-brands fa-facebook icon" href="{{company.facebook}}"></a>
+         {% endif %}
+   
+         {% if  company.instagram %}
+         <a class="fa-brands fa-instagram icon" href="{{company.instagram}}"></a>
+         {% endif%}
+   
+         {% if  company.youtube %}
+         <a class="fa-brands fa-youtube icon" href="{{company.youtube}}"></a>
+         {% endif%}
+   
+         {% if  company.telegram %}
+         <a class="fa-brands fa-telegram icon" href="{{company.telegram}}"></a>
+         {% endif%}
+   
+         {% if  company.twitter %}
+         <a class="fa-brands fa-twitter icon" href="{{company.twitter}}"></a>
+         {% endif%}
+   
+         {% if  company.tiktok %}
+         <a class="fa-brands fa-tiktok icon" href="{{company.tiktok}}"></a>
+         {% endif%}
+   
+         {% if  company.pinterest %}
+         <a class="fa-brands fa-pinterest icon" href="{{company.pinterest}}"></a>
+         {% endif%}
+   
+         {% if  company.snapChat %}
+         <a class="fa-brands fa-snapchat icon" href="{{company.snapChat}}"></a>
+         {% endif%}
+         
+         {% if  company.linkedin %}
+         <a class="fa-brands fa-linkedin icon" href="{{company.linkedin}}"></a>
+         {% endif%}
+         {% if  company.tumbler %}
+         <a class="fa-brands fa-tumblr icon" href="{{company.tumbler}}"></a>
+         {% endif%}
+   
+         {% if  company.vk %}
+         <a class="fa-brands fa-vk icon" href="{{company.vk}}"></a>
+         {% endif%}
+   
+         {% if  company.discord %}
+         <a class="fa-brands fa-discord icon" href="{{company.discord}}"></a>
+         {% endif%}
+   
+         {% if  company.twitch %}
+         <a class="fa-brands fa-twitch icon" href="{{company.twitch}}"></a>
+         {% endif%}
+   
+         {% if  company.quora %}
+         <a class="fa-brands fa-quora icon" href="{{company.quora}}"></a>
+         {% endif%}
+         
+         {% if  company.whatsapp %}
+         <a class="fa-brands fa-whatsapp icon" href="{{company.whatsapp}}"></a>
+         {% endif%}
+   
+         {% if  company.github %}
+         <a class="fa-brands fa-github icon" href="{{company.github}}"></a>
+         {% endif%}
+   
+         {% if  company.sinaweibo %} 
+         {% comment %} !! Doesnt't work !!{% endcomment %} 
+         <a class="fa-brands fa-sinaweibo icon" href="{{company.sinaweibo}}"></a>
+         {% endif%}
+   
+         {% if  company.viber %}
+         <a class="fa-brands fa-viber icon" href="{{company.viber}}"></a>
+         {% endif%}
+   
+         {% if  company.skype %}
+         <a class="fa-brands fa-skype icon" href="{{company.skype}}"></a>
+         {% endif%}
+   
+         {% if  company.soundCloud %}
+         <a class="fa-brands fa-soundcloud icon" href="{{company.soundCloud}}"></a>
+         {% endif%}
+   
+         {% if  company.spotify %}
+         <a class="fa-brands fa-spotify icon" href="{{company.spotify}}"></a>
+         {% endif%}
+   
+         {% if  company.their_website1 %}
+         <a class="fa-solid fa-earth-americas icon" href="{{company.spotify}}"></a>
+         {% endif%}
+   
+         {% if  company.their_website2 %} 
+         <a class="fa-solid fa-earth-americas icon" href="{{company.their_website2}}"></a>
+         {% endif%}
+         {% if  company.their_website3 %}
+         <a class="fa-solid fa-earth-americas icon" href="{{company.their_website3}}"></a>
+         {% endif%}
+      </div>
+      </div>
+   </div>
+   
+   <div class="message">
+   Скопировано!
+   </div>
+</div>
+
+
+<script src="{% static 'js/ClientPage.js' %}"></script>
+{% endblock content %}

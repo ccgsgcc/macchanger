@@ -1,0 +1,38 @@
+{% include "main.html" %}
+{% load static %}
+
+{% block title %}
+<title>Create</title>
+<link rel="stylesheet" href="{% static '/css/create.css' %}">
+{% endblock title %}
+
+{% block content %}
+<div class="page">
+  <form  method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+      <h2>Добавить Компанию</h2>
+      <input type="text" name="name" class="input" placeholder="Название...">
+      <input type="text" name="title" class="input" placeholder="Заголовок или цитата...">
+      <input type="text" name="number" class="input" placeholder="Номер...">
+      <input type="email" name="email" class="input" placeholder="Емаил...">
+      <input type="text" name="location" class="input" placeholder="Местоположение...">
+      <input type="file" name="ava" placeholder="Логотип...">
+      <textarea name="about" placeholder="Описание..." ></textarea>
+
+      <button type="submit" class="btn">Продолжить</button>
+  </form>
+</div>
+
+<script>
+  let inputs = document.querySelectorAll('.input');
+  let button = document.querySelector('button');
+
+  for (let input of inputs) {
+    input.value = localStorage.getItem(input.name);
+
+    input.addEventListener('change', () => {
+      localStorage.setItem(input.name, input.value);
+    });
+  }
+</script>
+{% endblock content %}

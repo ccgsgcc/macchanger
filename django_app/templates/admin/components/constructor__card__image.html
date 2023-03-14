@@ -1,0 +1,44 @@
+<div class="constructor__right__menu constructor__card__image">
+   <h2>Логотип Компании</h2>
+   <div class='setting'>
+      <input 
+      type="file"
+      id="constructor_card_change_ava" 
+      class="input"
+      name="ava" 
+   >  
+   </div>
+   <div class='setting'>
+      <img src='/logotips/{{company.ava}}' class="input__ava" alt='ava' />
+   </div>
+   <div class="setting">
+      <label>Закругление: </label>
+      <input 
+         type="text" 
+         class="settings__color"
+         name = 'card_image_border_radius'
+         value="{% if company.card_image_border_radius %}{{company.card_image_border_radius}}{% else %} 0px {% endif %}"
+         id = 'card_image_border_radius'
+      />
+   </div>
+   <div class="setting">
+      <label>Ширина:</label>
+      <input 
+         type="text" 
+         class="settings__color settings__color__max"
+         name = 'card_image_width'
+         value="{{company.card_image_width}}"
+         id = 'card_image_width'
+      />
+   </div>
+   <div class="setting">
+      <label>Длина: </label>
+      <input 
+         type="text" 
+         class="settings__color settings__color__max"
+         name = 'card_image_height'
+         value="{{company.card_image_height}}"
+         id = 'card_image_height'
+      />
+   </div>
+</div>
